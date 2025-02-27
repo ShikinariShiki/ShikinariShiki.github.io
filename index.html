@@ -8,9 +8,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <style>
     body {
-        background-color: #f5f5f5; 
-        font-family: 'Poppins', sans-serif; 
-        color: #333; 
+        background-color: #f5f5f5;
+        font-family: 'Poppins', sans-serif;
+        color: #333;
         line-height: 1.6;
         margin: 0;
         padding: 0;
@@ -19,13 +19,49 @@
         min-height: 100vh;
     }
 
+    /* Navbar Styles */
+    .navbar {
+        background-color: #2c3e50;
+        padding: 1rem 2rem;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    .navbar ul li {
+        margin: 0 1rem;
+    }
+
+    .navbar ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .navbar ul li a:hover {
+        background-color: #3498db;
+        color: white;
+    }
+
     .container {
-        max-width: 800px; 
-        margin: 2rem auto; 
-        padding: 1rem;
-        background-color: white; 
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-        border-radius: 8px; 
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
     }
 
     h1, h2, h3 {
@@ -62,11 +98,12 @@
         margin: 0 0.5rem;
         color: #333;
         font-size: 1.5rem;
-        transition: transform 0.3s ease;
+        transition: transform 0.3s ease, color 0.3s ease;
     }
 
     .social-links a:hover {
         transform: scale(1.1);
+        color: #3498db;
     }
 
     .skills {
@@ -110,7 +147,7 @@
         background-color: #f9f9f9;
         border-radius: 5px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .experience-item h4, .education-item h4, .achievements-item h4, .org-experience-item h4, .committee-experience-item h4 {
@@ -156,9 +193,48 @@
         margin: 0.5rem auto;
         border-radius: 2px;
     }
+
+    .contact-info {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .contact-info p {
+        margin: 0.5rem 0;
+    }
+
+    .social-links a.whatsapp:hover {
+        color: #25D366;
+    }
+
+    .social-links a.instagram:hover {
+        color: #E1306C;
+    }
+
+    .social-links a.linkedin:hover {
+        color: #0077B5;
+    }
+
+    .social-links a.github:hover {
+        color: #333;
+    }
+
+    /* Section IDs for Smooth Scrolling */
+    #about-me, #skills, #experience {
+        scroll-margin-top: 80px; /* Adjust for navbar height */
+    }
 </style>
 </head>
 <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="#about-me">About Me</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+        </ul>
+    </nav>
+
     <div class="container">
         <!-- Title -->
         <div class="title">
@@ -171,27 +247,30 @@
         </div>
 
         <!-- Name and Contact Information -->
-        <h1>Nathanael Kevin Irwanto</h1>
-        <p><strong>Tempat, Tanggal Lahir:</strong> Bekasi, 7 Maret 2006</p>
-        <p><strong>Alamat:</strong> Jl. Bend. Sengguruh No.30-16, Sumbersari, Kec. Lowokwaru, Kota Malang, Jawa Timur 65145</p>
-        <p><strong>Pendidikan:</strong> Jurusan Sistem Informasi - Universitas Brawijaya (2024-2028)</p>
-        <p><strong>Kontak:</strong> Email: natkevin143@gmail.com | Telepon: +6281290660658</p>
+        <div class="contact-info">
+            <h1>Nathanael Kevin Irwanto</h1>
+            <p><strong>Tempat, Tanggal Lahir:</strong> Bekasi, 7 Maret 2006</p>
+            <p><strong>Alamat:</strong> Jl. Bend. Sengguruh No.30-16, Sumbersari, Kec. Lowokwaru, Kota Malang, Jawa Timur 65145</p>
+            <p><strong>Pendidikan:</strong> Jurusan Sistem Informasi - Universitas Brawijaya (2024-2028)</p>
+            <p><strong>Kontak:</strong> Email: natkevin143@gmail.com | Telepon: +6281290660658</p>
+        </div>
 
         <!-- Social Links -->
         <div class="social-links">
-            <a href="#" class="fab fa-linkedin"></a>
-            <a href="#" class="fab fa-github"></a>
-            <a href="#" class="fab fa-twitter"></a>
+            <a href="https://wa.me/6281290660658" class="fab fa-whatsapp whatsapp"></a>
+            <a href="https://www.instagram.com/kep.pin" class="fab fa-instagram instagram"></a>
+            <a href="https://www.linkedin.com/in/nathanael-kevin" class="fab fa-linkedin linkedin"></a>
+            <a href="https://github.com/ShikinariShiki" class="fab fa-github github"></a>
         </div>
 
-        <!-- About Me -->
-        <div class="about-me">
+        <!-- About Me Section -->
+        <div id="about-me" class="about-me">
             <h3>About Me</h3>
             <p>Hello! I'm Nathanael Kevin Irwanto, a passionate and dedicated individual with a strong interest in technology and innovation. I'm currently pursuing my degree in Information Systems at Universitas Brawijaya. In my free time, I enjoy exploring new technologies, playing music, and participating in various community activities.</p>
         </div>
 
-        <!-- Skills -->
-        <div class="skills">
+        <!-- Skills Section -->
+        <div id="skills" class="skills">
             <h3>Skills</h3>
             <div class="skills-bar">
                 <div class="skills-bar-fill" style="width: 85%;">Java</div>
@@ -207,103 +286,23 @@
             </div>
         </div>
 
-        <!-- Achievements -->
-        <div class="achievements">
-            <h3>Prestasi Akademik / Non-Akademik</h3>
-            <div class="achievements-item">
-                <h4>1. Juara 3 Lomba Band Tingkat Nasional BIC 2021</h4>
-                <p>Tingkat: Nasional</p>
-                <p>Tahun: 2021</p>
-            </div>
-            <div class="achievements-item">
-                <h4>2. Juara 3 Lomba Band Tingkat Nasional INFLAMA 2022</h4>
-                <p>Tingkat: Nasional</p>
-                <p>Tahun: 2022</p>
-            </div>
-            <div class="achievements-item">
-                <h4>3. Juara Favorit Lomba Band Tingkat Nasional INFLAMA 2022</h4>
-                <p>Tingkat: Nasional</p>
-                <p>Tahun: 2022</p>
-            </div>
-        </div>
-
-        <!-- Organizational Experience -->
-        <div class="org-experience">
-            <h3>Pengalaman Organisasi</h3>
-            <div class="org-experience-item">
+        <!-- Experience Section -->
+        <div id="experience" class="experience">
+            <h3>Experience</h3>
+            <div class="experience-item">
                 <h4>1. GBIGW Production Team</h4>
                 <p>Jabatan: Divisi Media & Dokumentasi</p>
                 <p>Tahun: Oktober 2018 – Juli 2024</p>
             </div>
-            <div class="org-experience-item">
+            <div class="experience-item">
                 <h4>2. Sunday School GBIGW 2 Rayon 8</h4>
                 <p>Jabatan: Divisi Media & Creative</p>
                 <p>Tahun: Februari 2023 – November 2023</p>
             </div>
-            <div class="org-experience-item">
+            <div class="experience-item">
                 <h4>3. GBI Suropati Team</h4>
                 <p>Jabatan: Divisi Multimedia</p>
                 <p>Tahun: Oktober 2024 – Sekarang</p>
-            </div>
-            <div class="org-experience-item">
-                <h4>4. Keluarga Besar Departemen Sistem Informasi 2024</h4>
-                <p>Jabatan: Departemen Advokesma (Staff Muda)</p>
-                <p>Tahun: Oktober 2024 - Desember 2024</p>
-            </div>
-        </div>
-
-        <!-- Committee Experience -->
-        <div class="committee-experience">
-            <h3>Pengalaman Kepanitiaan</h3>
-            <div class="committee-experience-item">
-                <h4>1. I’Fame 2023</h4>
-                <p>Jabatan: Steering Committee (Divisi Acara)</p>
-                <p>Tahun: 2023</p>
-            </div>
-            <div class="committee-experience-item">
-                <h4>2. #BekasiYouthRevival 2023</h4>
-                <p>Jabatan: Organizing Committee (Divisi Multimedia)</p>
-                <p>Tahun: 2023</p>
-            </div>
-            <div class="committee-experience-item">
-                <h4>3. GBIGW 2 Rayon 8 Christmas Celebration</h4>
-                <p>Jabatan: Organizing Committee (Divisi Multimedia)</p>
-                <p>Tahun: 2022 - 2023</p>
-            </div>
-            <div class="committee-experience-item">
-                <h4>4. EveryOneAsia 2024</h4>
-                <p>Jabatan: Volunteer (Divisi Multimedia)</p>
-                <p>Tahun: 2024</p>
-            </div>
-            <div class="committee-experience-item">
-                <h4>5. Prayer Festival Tambun 2024</h4>
-                <p>Jabatan: Organizing Committee (Divisi Multimedia)</p>
-                <p>Tahun: 2024</p>
-            </div>
-            <div class="committee-experience-item">
-                <h4>6. Welcome Party NextGen Malang 2024</h4>
-                <p>Jabatan: Organizing Committee (Divisi Publikasi dan Dokumentasi)</p>
-                <p>Tahun: 2024</p>
-            </div>
-            <div class="committee-experience-item">
-                <h4>7. SCHORITY 2024</h4>
-                <p>Jabatan: Organizing Comittee (Master of Ceremony)</p>
-                <p>Tahun: 2024</p>
-            </div>
-            <div class="committee-experience-item">
-                <h4>8. HUT ke-14 GBI Suropati Rayon 2 2024</h4>
-                <p>Jabatan: Organizing Committee (Divisi Multimedia)</p>
-                <p>Tahun: 2024</p>
-            </div>
-            <div class="committee-experience-item">
-                <h4>9. Demisioner KBMDSI 2024</h4>
-                <p>Jabatan: Organizing Committee (Divisi Transportasi, Akomodasi, Perlengkapan, Keamanan)</p>
-                <p>Tahun: 2024</p>
-            </div>
-            <div class="committee-experience-item">
-                <h4>10. Gathering SI-E 2024</h4>
-                <p>Jabatan: Ketua Pelaksana</p>
-                <p>Tahun: 2024</p>
             </div>
         </div>
     </div>
