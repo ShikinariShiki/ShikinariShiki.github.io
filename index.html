@@ -3,30 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Curriculum Vitae</title>
+<title>🌟 Nathanael Kevin Irwanto - Portfolio 🌟</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <style>
-    body {
-        background-color: #f5f5f5;
-        font-family: 'Poppins', sans-serif;
-        color: #333;
-        line-height: 1.6;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
+    /* ===== GLOBAL STYLES ===== */
+    :root {
+        --bg-color: #f8f9fa;
+        --text-color: #2b2d42;
+        --card-bg: white;
+        --card-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        --primary-color: #3498db;
+        --hover-color: #2980b9;
     }
 
-    /* Navbar Styles */
+    [data-theme="dark"] {
+        --bg-color: #1e1e2f;
+        --text-color: #f8f9fa;
+        --card-bg: #2c3e50;
+        --card-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        --primary-color: #2980b9;
+        --hover-color: #3498db;
+    }
+
+    body {
+        background: var(--bg-color);
+        color: var(--text-color);
+        font-family: 'Poppins', sans-serif;
+        line-height: 1.8;
+        margin: 0;
+        padding: 0;
+        transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    /* ===== NAVBAR ===== */
     .navbar {
-        background-color: #2c3e50;
-        padding: 1rem 2rem;
+        background: linear-gradient(135deg, var(--primary-color), #2c3e50);
+        padding: 1.2rem;
         position: sticky;
         top: 0;
         z-index: 1000;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
 
     .navbar ul {
@@ -35,46 +52,72 @@
         padding: 0;
         display: flex;
         justify-content: center;
-    }
-
-    .navbar ul li {
-        margin: 0 1rem;
+        gap: 2rem;
     }
 
     .navbar ul li a {
         color: white;
         text-decoration: none;
-        font-size: 1rem;
-        padding: 0.5rem 1rem;
-        border-radius: 5px;
-        transition: background-color 0.3s ease, color 0.3s ease;
+        font-weight: 500;
+        padding: 0.8rem 1.5rem;
+        border-radius: 30px;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.1);
     }
 
     .navbar ul li a:hover {
-        background-color: #3498db;
-        color: white;
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
     }
 
+    /* ===== DARK MODE TOGGLE ===== */
+    .theme-toggle {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 0.8rem 1.2rem;
+        border-radius: 30px;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transition: background 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+        background: var(--hover-color);
+    }
+
+    /* ===== CONTAINER ===== */
     .container {
         max-width: 800px;
         margin: 2rem auto;
         padding: 2rem;
-        background-color: white;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
+        background: var(--card-bg);
+        border-radius: 15px;
+        box-shadow: var(--card-shadow);
+        transition: background 0.5s ease, box-shadow 0.5s ease;
     }
 
-    h1, h2, h3 {
-        color: #2c3e50;
+    /* ===== SECTIONS ===== */
+    .section {
+        display: none; /* Hide all sections by default */
+        margin-top: 2rem;
     }
 
+    .section.active {
+        display: block; /* Show active section */
+    }
+
+    /* ===== PROFILE SECTION ===== */
     .profile-picture {
         width: 150px;
         height: 150px;
         border-radius: 50%;
         overflow: hidden;
         margin: 1rem auto;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         transition: transform 0.3s ease;
     }
 
@@ -88,228 +131,497 @@
         transform: scale(1.05);
     }
 
+    .contact-info {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .contact-info h1 {
+        font-size: 2.5rem;
+        color: var(--text-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .contact-info p {
+        margin: 0.5rem 0;
+        color: var(--text-color);
+    }
+
     .social-links {
         display: flex;
         justify-content: center;
+        gap: 1.5rem;
         margin-top: 1rem;
     }
 
     .social-links a {
-        margin: 0 0.5rem;
-        color: #333;
+        color: var(--text-color);
         font-size: 1.5rem;
         transition: transform 0.3s ease, color 0.3s ease;
     }
 
     .social-links a:hover {
         transform: scale(1.1);
-        color: #3498db;
+        color: var(--primary-color);
     }
 
-    .skills {
+    /* ===== SKILLS SECTION ===== */
+    .skills-grid {
+        display: grid;
+        gap: 1.5rem;
         margin-top: 2rem;
     }
 
-    .skills h3 {
+    .skill-item {
+        background: var(--card-bg);
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: var(--card-shadow);
+        transition: transform 0.3s ease;
+    }
+
+    .skill-item:hover {
+        transform: translateY(-5px);
+    }
+
+    .skill-item h3 {
+        font-size: 1.2rem;
+        color: var(--text-color);
         margin-bottom: 0.5rem;
     }
 
-    .skills-bar {
+    .skill-bar {
         width: 100%;
-        background-color: #ddd;
+        height: 10px;
+        background: #ddd;
         border-radius: 5px;
         overflow: hidden;
+    }
+
+    .skill-bar-fill {
+        height: 100%;
+        background: var(--primary-color);
+        border-radius: 5px;
+        width: 0; /* Initial width */
+        transition: width 1s ease;
+    }
+
+    /* ===== EXPERIENCE SECTION ===== */
+    .experience-item, .achievements-item {
+        background: var(--card-bg);
+        padding: 1.5rem;
+        border-radius: 10px;
         margin-bottom: 1rem;
+        box-shadow: var(--card-shadow);
+        transition: transform 0.3s ease;
+        cursor: pointer;
     }
 
-    .skills-bar-fill {
-        height: 20px;
-        background-color: #3498db;
-        text-align: right;
-        padding: 0 5px;
-        color: white;
-        font-size: 0.8rem;
-        line-height: 20px;
-        transition: width 0.5s ease;
+    .experience-item:hover, .achievements-item:hover {
+        transform: translateY(-5px);
     }
 
-    .experience, .education, .achievements, .org-experience, .committee-experience, .about-me {
-        margin-top: 2rem;
-    }
-
-    .experience h3, .education h3, .achievements h3, .org-experience h3, .committee-experience h3, .about-me h3 {
+    .experience-item h3, .achievements-item h3 {
+        font-size: 1.5rem;
+        color: var(--text-color);
         margin-bottom: 0.5rem;
     }
 
-    .experience-item, .education-item, .achievements-item, .org-experience-item, .committee-experience-item, .about-me p {
-        margin-bottom: 1rem;
-        padding: 1rem;
-        background-color: #f9f9f9;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .experience-item h4, .education-item h4, .achievements-item h4, .org-experience-item h4, .committee-experience-item h4 {
-        margin: 0 0 0.5rem;
-    }
-
-    .experience-item p, .education-item p, .achievements-item p, .org-experience-item p, .committee-experience-item p {
+    .experience-item p, .achievements-item p {
         margin: 0.5rem 0;
+        color: var(--text-color);
     }
 
-    .experience-item:hover, .education-item:hover, .achievements-item:hover, .org-experience-item:hover, .committee-experience-item:hover, .about-me:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    .experience-logo {
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        object-fit: cover;
+        margin-right: 1rem;
     }
 
+    /* ===== MODAL ===== */
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .modal-content {
+        background: var(--card-bg);
+        padding: 2rem;
+        border-radius: 15px;
+        max-width: 600px;
+        width: 90%;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        position: relative;
+    }
+
+    .modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--text-color);
+    }
+
+    .modal-images {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .modal-images img {
+        width: 100px;
+        height: 100px;
+        border-radius: 10px;
+        object-fit: cover;
+    }
+
+    /* ===== MAP SECTION ===== */
     .map-container {
         margin-top: 2rem;
-        position: relative;
-        width: 100%;
-        height: 400px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
     }
 
     .map-container iframe {
         width: 100%;
-        height: 100%;
+        height: 300px;
         border: 0;
     }
 
-    .title {
-        text-align: center;
-        margin-bottom: 2rem;
-        font-size: 2rem;
-        color: #2c3e50;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
-    .title::after {
-        content: '';
-        display: block;
-        width: 50px;
-        height: 3px;
-        background-color: #3498db;
-        margin: 0.5rem auto;
-        border-radius: 2px;
-    }
-
-    .contact-info {
-        text-align: center;
-        margin-bottom: 2rem;
-    }
-
-    .contact-info p {
-        margin: 0.5rem 0;
-    }
-
-    .social-links a.whatsapp:hover {
-        color: #25D366;
-    }
-
-    .social-links a.instagram:hover {
-        color: #E1306C;
-    }
-
-    .social-links a.linkedin:hover {
-        color: #0077B5;
-    }
-
-    .social-links a.github:hover {
-        color: #333;
-    }
-
-    /* Section IDs for Smooth Scrolling */
-    #about-me, #skills, #experience {
-        scroll-margin-top: 80px; /* Adjust for navbar height */
+    .fade-in {
+        animation: fadeIn 0.8s ease-out;
     }
 </style>
 </head>
 <body>
-    <!-- Navbar -->
+    <!-- NAVBAR -->
     <nav class="navbar">
         <ul>
-            <li><a href="#about-me">About Me</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#experience">Experience</a></li>
+            <li><a href="#" onclick="showSection('about')">About Me</a></li>
+            <li><a href="#" onclick="showSection('skills')">Skills</a></li>
+            <li><a href="#" onclick="showSection('experience')">Experience</a></li>
+            <li><a href="#" onclick="showSection('achievements')">Achievements</a></li>
         </ul>
     </nav>
 
+    <!-- DARK MODE TOGGLE -->
+    <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark Mode</button>
+
+    <!-- CONTAINER -->
     <div class="container">
-        <!-- Title -->
-        <div class="title">
-            <h1>Curriculum Vitae</h1>
-        </div>
-
-        <!-- Profile Picture -->
-        <div class="profile-picture">
-            <img src="img1.JPG" alt="Profile Picture">
-        </div>
-
-        <!-- Name and Contact Information -->
-        <div class="contact-info">
-            <h1>Nathanael Kevin Irwanto</h1>
-            <p><strong>Tempat, Tanggal Lahir:</strong> Bekasi, 7 Maret 2006</p>
-            <p><strong>Alamat:</strong> Jl. Bend. Sengguruh No.30-16, Sumbersari, Kec. Lowokwaru, Kota Malang, Jawa Timur 65145</p>
-            <p><strong>Pendidikan:</strong> Jurusan Sistem Informasi - Universitas Brawijaya (2024-2028)</p>
-            <p><strong>Kontak:</strong> Email: natkevin143@gmail.com | Telepon: +6281290660658</p>
-        </div>
-
-        <!-- Social Links -->
-        <div class="social-links">
-            <a href="https://wa.me/6281290660658" class="fab fa-whatsapp whatsapp"></a>
-            <a href="https://www.instagram.com/kep.pin" class="fab fa-instagram instagram"></a>
-            <a href="https://www.linkedin.com/in/nathanael-kevin" class="fab fa-linkedin linkedin"></a>
-            <a href="https://github.com/ShikinariShiki" class="fab fa-github github"></a>
-        </div>
-
-        <!-- About Me Section -->
-        <div id="about-me" class="about-me">
-            <h3>About Me</h3>
-            <p>Hello! I'm Nathanael Kevin Irwanto, a passionate and dedicated individual with a strong interest in technology and innovation. I'm currently pursuing my degree in Information Systems at Universitas Brawijaya. In my free time, I enjoy exploring new technologies, playing music, and participating in various community activities.</p>
-        </div>
-
-        <!-- Skills Section -->
-        <div id="skills" class="skills">
-            <h3>Skills</h3>
-            <div class="skills-bar">
-                <div class="skills-bar-fill" style="width: 85%;">Java</div>
+        <!-- ABOUT ME SECTION -->
+        <div id="about" class="section active">
+            <div class="profile-picture">
+                <img src="img1.JPG" alt="Profile Picture">
             </div>
-            <div class="skills-bar">
-                <div class="skills-bar-fill" style="width: 75%;">Live-Streaming</div>
+            <div class="contact-info">
+                <h1>Nathanael Kevin Irwanto</h1>
+                <p><strong>Tempat, Tanggal Lahir:</strong> Bekasi, 7 Maret 2006</p>
+                <p><strong>Alamat:</strong> Jl. Bend. Sengguruh No.30-16, Sumbersari, Kec. Lowokwaru, Kota Malang, Jawa Timur 65145</p>
+                <p><strong>Pendidikan:</strong> Jurusan Sistem Informasi - Universitas Brawijaya (2024-2028)</p>
+                <p><strong>Kontak:</strong> Email: natkevin143@gmail.com | Telepon: +6281290660658</p>
             </div>
-            <div class="skills-bar">
-                <div class="skills-bar-fill" style="width: 70%;">Japanese Language</div>
+            <div class="social-links">
+                <a href="https://wa.me/6281290660658" class="fab fa-whatsapp whatsapp" aria-label="WhatsApp"></a>
+                <a href="https://www.instagram.com/yourusername" class="fab fa-instagram instagram" aria-label="Instagram"></a>
+                <a href="https://www.linkedin.com/in/yourusername" class="fab fa-linkedin linkedin" aria-label="LinkedIn"></a>
+                <a href="https://github.com/yourusername" class="fab fa-github github" aria-label="GitHub"></a>
             </div>
-            <div class="skills-bar">
-                <div class="skills-bar-fill" style="width: 60%;">Music</div>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15805.789305926219!2d112.60794585!3d-7.9526390000000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7883d35ec94a91%3A0x3ee36b2c3715f3f!2sKos%20Bendungan%20Sengguruh%2021B!5e0!3m2!1sen!2sid!4v1740445761437!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
 
-        <!-- Experience Section -->
-        <div id="experience" class="experience">
-            <h3>Experience</h3>
-            <div class="experience-item">
-                <h4>1. GBIGW Production Team</h4>
-                <p>Jabatan: Divisi Media & Dokumentasi</p>
-                <p>Tahun: Oktober 2018 – Juli 2024</p>
+        <!-- SKILLS SECTION -->
+        <div id="skills" class="section">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <h3>Java Programming</h3>
+                    <div class="skill-bar">
+                        <div class="skill-bar-fill" style="width: 85%;"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <h3>Live-Streaming</h3>
+                    <div class="skill-bar">
+                        <div class="skill-bar-fill" style="width: 75%;"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <h3>Japanese Language</h3>
+                    <div class="skill-bar">
+                        <div class="skill-bar-fill" style="width: 70%;"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <h3>Music Production</h3>
+                    <div class="skill-bar">
+                        <div class="skill-bar-fill" style="width: 60%;"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <h3>Web Development</h3>
+                    <div class="skill-bar">
+                        <div class="skill-bar-fill" style="width: 80%;"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <h3>Graphic Design</h3>
+                    <div class="skill-bar">
+                        <div class="skill-bar-fill" style="width: 65%;"></div>
+                    </div>
+                </div>
             </div>
-            <div class="experience-item">
-                <h4>2. Sunday School GBIGW 2 Rayon 8</h4>
-                <p>Jabatan: Divisi Media & Creative</p>
-                <p>Tahun: Februari 2023 – November 2023</p>
+        </div>
+
+        <!-- EXPERIENCE SECTION -->
+        <div id="experience" class="section">
+            <h2>Pengalaman Organisasi & Kepanitiaan</h2>
+
+            <!-- Pengalaman Organisasi -->
+            <h3>Pengalaman Organisasi</h3>
+            <div class="experience-item" onclick="openModal('GBIGW Production Team', 'Divisi Media & Dokumentasi', 'Oktober 2018 – Juli 2024', ['img1.jpg', 'img2.jpg'])">
+                <img src="logo1.png" alt="GBIGW Logo" class="experience-logo">
+                <div>
+                    <h3>GBIGW Production Team</h3>
+                    <p><strong>Jabatan:</strong> Divisi Media & Dokumentasi</p>
+                    <p><strong>Tahun:</strong> Oktober 2018 – Juli 2024</p>
+                </div>
             </div>
-            <div class="experience-item">
-                <h4>3. GBI Suropati Team</h4>
-                <p>Jabatan: Divisi Multimedia</p>
-                <p>Tahun: Oktober 2024 – Sekarang</p>
+            <div class="experience-item" onclick="openModal('Sunday School GBIGW 2 Rayon 8', 'Divisi Media & Creative', 'Februari 2023 – November 2023', ['img3.jpg', 'img4.jpg'])">
+                <img src="logo2.png" alt="Sunday School Logo" class="experience-logo">
+                <div>
+                    <h3>Sunday School GBIGW 2 Rayon 8</h3>
+                    <p><strong>Jabatan:</strong> Divisi Media & Creative</p>
+                    <p><strong>Tahun:</strong> Februari 2023 – November 2023</p>
+                </div>
+            </div>
+            <div class="experience-item" onclick="openModal('GBI Suropati Team', 'Divisi Multimedia', 'Oktober 2024 – Sekarang', ['img5.jpg', 'img6.jpg'])">
+                <img src="logo3.png" alt="GBI Suropati Logo" class="experience-logo">
+                <div>
+                    <h3>GBI Suropati Team</h3>
+                    <p><strong>Jabatan:</strong> Divisi Multimedia</p>
+                    <p><strong>Tahun:</strong> Oktober 2024 – Sekarang</p>
+                </div>
+            </div>
+            <div class="experience-item" onclick="openModal('Keluarga Besar Departemen Sistem Informasi 2024', 'Departemen Advokesma (Staff Muda)', 'Oktober 2024 - Desember 2024', ['img7.jpg', 'img8.jpg'])">
+                <img src="logo4.png" alt="KBMDSI Logo" class="experience-logo">
+                <div>
+                    <h3>Keluarga Besar Departemen Sistem Informasi 2024</h3>
+                    <p><strong>Jabatan:</strong> Departemen Advokesma (Staff Muda)</p>
+                    <p><strong>Tahun:</strong> Oktober 2024 - Desember 2024</p>
+                </div>
+            </div>
+
+            <!-- Pengalaman Kepanitiaan -->
+            <h3>Pengalaman Kepanitiaan</h3>
+            <div class="experience-item" onclick="openModal('I’Fame 2023', 'Steering Committee (Divisi Acara)', '2023', ['img9.jpg', 'img10.jpg'])">
+                <img src="logo5.png" alt="I’Fame Logo" class="experience-logo">
+                <div>
+                    <h3>I’Fame 2023</h3>
+                    <p><strong>Jabatan:</strong> Steering Committee (Divisi Acara)</p>
+                    <p><strong>Tahun:</strong> 2023</p>
+                </div>
+            </div>
+            <div class="experience-item" onclick="openModal('#BekasiYouthRevival 2023', 'Organizing Committee (Divisi Multimedia)', '2023', ['img11.jpg', 'img12.jpg'])">
+                <img src="logo6.png" alt="Bekasi Youth Revival Logo" class="experience-logo">
+                <div>
+                    <h3>#BekasiYouthRevival 2023</h3>
+                    <p><strong>Jabatan:</strong> Organizing Committee (Divisi Multimedia)</p>
+                    <p><strong>Tahun:</strong> 2023</p>
+                </div>
+            </div>
+            <div class="experience-item" onclick="openModal('GBIGW 2 Rayon 8 Christmas Celebration', 'Organizing Committee (Divisi Multimedia)', '2022 - 2023', ['img13.jpg', 'img14.jpg'])">
+                <img src="logo7.png" alt="GBIGW Christmas Logo" class="experience-logo">
+                <div>
+                    <h3>GBIGW 2 Rayon 8 Christmas Celebration</h3>
+                    <p><strong>Jabatan:</strong> Organizing Committee (Divisi Multimedia)</p>
+                    <p><strong>Tahun:</strong> 2022 - 2023</p>
+                </div>
+            </div>
+            <div class="experience-item" onclick="openModal('EveryOneAsia 2024', 'Volunteer (Divisi Multimedia)', '2024', ['img15.jpg', 'img16.jpg'])">
+                <img src="logo8.png" alt="EveryOneAsia Logo" class="experience-logo">
+                <div>
+                    <h3>EveryOneAsia 2024</h3>
+                    <p><strong>Jabatan:</strong> Volunteer (Divisi Multimedia)</p>
+                    <p><strong>Tahun:</strong> 2024</p>
+                </div>
+            </div>
+            <div class="experience-item" onclick="openModal('Prayer Festival Tambun 2024', 'Organizing Committee (Divisi Multimedia)', '2024', ['img17.jpg', 'img18.jpg'])">
+                <img src="logo9.png" alt="Prayer Festival Logo" class="experience-logo">
+                <div>
+                    <h3>Prayer Festival Tambun 2024</h3>
+                    <p><strong>Jabatan:</strong> Organizing Committee (Divisi Multimedia)</p>
+                    <p><strong>Tahun:</strong> 2024</p>
+                </div>
+            </div>
+            <div class="experience-item" onclick="openModal('Welcome Party NextGen Malang 2024', 'Organizing Committee (Divisi Publikasi dan Dokumentasi)', '2024', ['img19.jpg', 'img20.jpg'])">
+                <img src="logo10.png" alt="Welcome Party Logo" class="experience-logo">
+                <div>
+                    <h3>Welcome Party NextGen Malang 2024</h3>
+                    <p><strong>Jabatan:</strong> Organizing Committee (Divisi Publikasi dan Dokumentasi)</p>
+                    <p><strong>Tahun:</strong> 2024</p>
+                </div>
+            </div>
+            <div class="experience-item" onclick="openModal('SCHORITY 2024', 'Organizing Committee (Master of Ceremony)', '2024', ['img21.jpg', 'img22.jpg'])">
+                <img src="logo11.png" alt="SCHORITY Logo" class="experience-logo">
+                <div>
+                    <h3>SCHORITY 2024</h3>
+                    <p><strong>Jabatan:</strong> Organizing Committee (Master of Ceremony)</p>
+                    <p><strong>Tahun:</strong> 2024</p>
+                </div>
+            </div>
+            <div class="experience-item" onclick="openModal('HUT ke-14 GBI Suropati Rayon 2 2024', 'Organizing Committee (Divisi Multimedia)', '2024', ['img23.jpg', 'img24.jpg'])">
+                <img src="logo12.png" alt="HUT GBI Suropati Logo" class="experience-logo">
+                <div>
+                    <h3>HUT ke-14 GBI Suropati Rayon 2 2024</h3>
+                    <p><strong>Jabatan:</strong> Organizing Committee (Divisi Multimedia)</p>
+                    <p><strong>Tahun:</strong> 2024</p>
+                </div>
+            </div>
+            <div class="experience-item" onclick="openModal('Demisioner KBMDSI 2024', 'Organizing Committee (Divisi Transportasi, Akomodasi, Perlengkapan, Keamanan)', '2024', ['img25.jpg', 'img26.jpg'])">
+                <img src="logo13.png" alt="Demisioner KBMDSI Logo" class="experience-logo">
+                <div>
+                    <h3>Demisioner KBMDSI 2024</h3>
+                    <p><strong>Jabatan:</strong> Organizing Committee (Divisi Transportasi, Akomodasi, Perlengkapan, Keamanan)</p>
+                    <p><strong>Tahun:</strong> 2024</p>
+                </div>
+            </div>
+            <div class="experience-item" onclick="openModal('Gathering SI-E 2024', 'Ketua Pelaksana', '2024', ['img27.jpg', 'img28.jpg'])">
+                <img src="logo14.png" alt="Gathering SI-E Logo" class="experience-logo">
+                <div>
+                    <h3>Gathering SI-E 2024</h3>
+                    <p><strong>Jabatan:</strong> Ketua Pelaksana</p>
+                    <p><strong>Tahun:</strong> 2024</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACHIEVEMENTS SECTION -->
+        <div id="achievements" class="section">
+            <h2>Prestasi Akademik / Non-Akademik</h2>
+            <div class="achievements-item" onclick="openModal('Juara 3 Lomba Band Tingkat Nasional BIC 2021', 'Tingkat: Nasional', 'Tahun: 2021', ['img29.jpg', 'img30.jpg'])">
+                <h3>Juara 3 Lomba Band Tingkat Nasional BIC 2021</h3>
+                <p><strong>Tingkat:</strong> Nasional</p>
+                <p><strong>Tahun:</strong> 2021</p>
+            </div>
+            <div class="achievements-item" onclick="openModal('Juara 3 Lomba Band Tingkat Nasional INFLAMA 2022', 'Tingkat: Nasional', 'Tahun: 2022', ['img31.jpg', 'img32.jpg'])">
+                <h3>Juara 3 Lomba Band Tingkat Nasional INFLAMA 2022</h3>
+                <p><strong>Tingkat:</strong> Nasional</p>
+                <p><strong>Tahun:</strong> 2022</p>
+            </div>
+            <div class="achievements-item" onclick="openModal('Juara Favorit Lomba Band Tingkat Nasional INFLAMA 2022', 'Tingkat: Nasional', 'Tahun: 2022', ['img33.jpg', 'img34.jpg'])">
+                <h3>Juara Favorit Lomba Band Tingkat Nasional INFLAMA 2022</h3>
+                <p><strong>Tingkat:</strong> Nasional</p>
+                <p><strong>Tahun:</strong> 2022</p>
             </div>
         </div>
     </div>
 
-    <!-- Map -->
-    <div class="map-container">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15805.789305926219!2d112.60794585!3d-7.9526390000000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7883d35ec94a91%3A0x3ee36b2c3715f3f!2sKos%20Bendungan%20Sengguruh%2021B!5e0!3m2!1sen!2sid!4v1740445761437!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <!-- MODAL -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <h2 id="modal-title"></h2>
+            <p id="modal-description"></p>
+            <div class="modal-images" id="modal-images"></div>
+        </div>
     </div>
+
+    <script>
+        // Function to show the selected section and hide others
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show the selected section
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        // Animate skill bars on scroll
+        const skillBars = document.querySelectorAll('.skill-bar-fill');
+        const animateSkillBars = () => {
+            skillBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0'; // Reset width
+                setTimeout(() => {
+                    bar.style.width = width; // Animate to full width
+                }, 100);
+            });
+        };
+
+        // Trigger animation when Skills section is shown
+        document.querySelector('a[href="#skills"]').addEventListener('click', animateSkillBars);
+
+        // Set default section
+        showSection('about');
+
+        // Dark Mode Toggle
+        function toggleTheme() {
+            const body = document.body;
+            const themeToggle = document.querySelector('.theme-toggle');
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                themeToggle.textContent = '🌙 Dark Mode';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeToggle.textContent = '☀️ Light Mode';
+            }
+        }
+
+        // Modal Functions
+        function openModal(title, description, year, images) {
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDescription = document.getElementById('modal-description');
+            const modalImages = document.getElementById('modal-images');
+
+            modalTitle.textContent = title;
+            modalDescription.textContent = `${description}\n${year}`;
+            modalImages.innerHTML = images.map(img => `<img src="${img}" alt="Gallery Image">`).join('');
+
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+    </script>
 </body>
 </html>
