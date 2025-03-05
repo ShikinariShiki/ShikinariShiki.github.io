@@ -36,6 +36,77 @@
         transition: background 0.5s ease, color 0.5s ease;
     }
 
+    /* ===== HAMBURGER MENU ===== */
+    .hamburger {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 2rem;
+        cursor: pointer;
+        display: none;
+        z-index: 1001;
+    }
+
+    .nav-menu {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    @media (max-width: 768px) {
+        .hamburger {
+            display: block;
+            position: fixed;
+            top: 1.2rem;
+            left: 1.2rem;
+        }
+
+        .nav-menu {
+            display: none;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            padding-top: 60px;
+            gap: 1.5rem;
+            text-align: center;
+            z-index: 1000;
+        }
+
+        .nav-menu.active {
+            display: flex;
+        }
+
+        .nav-menu li {
+            margin: 1rem 0;
+        }
+
+        .nav-menu a {
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .no-scroll {
+            overflow: hidden;
+        }
+    }
+
     /* ===== NAVBAR ===== */
     .navbar {
         background: linear-gradient(135deg, var(--primary-color), #2c3e50);
@@ -102,12 +173,13 @@
 
     /* ===== SECTIONS ===== */
     .section {
-        display: none; /* Hide all sections by default */
+        display: none;
         margin-top: 2rem;
     }
 
     .section.active {
-        display: block; /* Show active section */
+        display: block;
+        animation: fadeInUp 0.8s ease-out;
     }
 
     /* ===== PROFILE SECTION ===== */
@@ -128,7 +200,7 @@
     }
 
     .profile-picture:hover {
-        transform: scale(1.05);
+        transform: scale(1.1);
     }
 
     .contact-info {
@@ -202,7 +274,7 @@
         height: 100%;
         background: var(--primary-color);
         border-radius: 5px;
-        width: 0; /* Initial width */
+        width: 0;
         transition: width 1s ease;
     }
 
@@ -301,7 +373,7 @@
     }
 
     /* ===== ANIMATIONS ===== */
-    @keyframes fadeIn {
+    @keyframes fadeInUp {
         from {
             opacity: 0;
             transform: translateY(20px);
@@ -312,19 +384,40 @@
         }
     }
 
-    .fade-in {
-        animation: fadeIn 0.8s ease-out;
+    @keyframes slideInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .section.active .skill-item {
+        animation: slideInLeft 0.6s ease-out;
+    }
+
+    .section.active .experience-item {
+        animation: slideInLeft 0.6s ease-out;
+    }
+
+    .section.active .achievements-item {
+        animation: slideInLeft 0.6s ease-out;
     }
 </style>
 </head>
 <body>
     <!-- NAVBAR -->
     <nav class="navbar">
-        <ul>
+        <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
+        <ul class="nav-menu">
             <li><a href="#" onclick="showSection('about')">About Me</a></li>
             <li><a href="#" onclick="showSection('skills')">Skills</a></li>
             <li><a href="#" onclick="showSection('experience')">Experience</a></li>
             <li><a href="#" onclick="showSection('achievements')">Achievements</a></li>
+            <li class="menu-close"><span onclick="toggleMenu()">&times;</span></li>
         </ul>
     </nav>
 
@@ -556,29 +649,11 @@
     <script>
         // Function to show the selected section and hide others
         function showSection(sectionId) {
-            // Hide all sections
             document.querySelectorAll('.section').forEach(section => {
                 section.classList.remove('active');
             });
-
-            // Show the selected section
             document.getElementById(sectionId).classList.add('active');
         }
-
-        // Animate skill bars on scroll
-        const skillBars = document.querySelectorAll('.skill-bar-fill');
-        const animateSkillBars = () => {
-            skillBars.forEach(bar => {
-                const width = bar.style.width;
-                bar.style.width = '0'; // Reset width
-                setTimeout(() => {
-                    bar.style.width = width; // Animate to full width
-                }, 100);
-            });
-        };
-
-        // Trigger animation when Skills section is shown
-        document.querySelector('a[href="#skills"]').addEventListener('click', animateSkillBars);
 
         // Set default section
         showSection('about');
@@ -622,6 +697,21 @@
                 closeModal();
             }
         };
+
+        // Hamburger Menu Toggle
+        function toggleMenu() {
+            const navMenu = document.querySelector('.nav-menu');
+            const body = document.body;
+            navMenu.classList.toggle('active');
+            body.classList.toggle('no-scroll');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.navbar') && document.querySelector('.nav-menu.active')) {
+                toggleMenu();
+            }
+        });
     </script>
 </body>
 </html>
