@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        :root {
+            --darkBG: #1a1a1a;
+            --darkColor: #ffffff;
+            --otherColor: #26262c;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--otherColor);
+        }
+        .container {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+            position: relative;
+        }
+        .calculator {
+            background-color: var(--darkBG);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.723);
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 0.5s ease forwards;
+            flex: 1;
+            min-width: 300px;
+        }
+        .advanced-section {
+            background-color: var(--darkBG);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.723);
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 0.5s ease forwards;
+            flex: 0 0 200px;
+        }
+        .history-section {
+            background-color: var(--darkBG);
+            padding: 10px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.723);
+            text-align: center;
+            color: var(--darkColor);
+            display: block;
+            position: relative;
+            flex: 0 0 250px;
+            animation: slideIn 0.5s ease forwards;
+            overflow-y: auto;
+        }
+        .display {
+            width: 100%;
+            padding: 15px;
+            font-size: 24px;
+            box-sizing: border-box;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--darkColor);
+            text-align: right;
+            border: none;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .upper-display {
+            font-size: 18px;
+            opacity: 0.7;
+            margin-bottom: 5px;
+        }
+        .lower-display {
+            font-size: 24px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 5px;
+        }
+        button {
+            width: 100%;
+            height: 60px;
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.1s ease, background-color 0.3s ease;
+        }
+        .operator {
+            background-color: #3498db;
+            color: white;
+        }
+        .operator:hover {
+            background-color: #2980b9;
+        }
+        .number {
+            background-color: #333;
+            color: var(--darkColor);
+        }
+        .number:hover {
+            background-color: #444;
+        }
+        .clear {
+            background-color: #e74c3c;
+            color: white;
+        }
+        .clear:hover {
+            background-color: #c0392b;
+        }
+        .equal {
+            background-color: #2ecc71;
+            color: white;
+            height: 274px;
+        }
+        .equal:hover {
+            background-color: #27ae60;
+        }
+        .function {
+            background-color: #333;
+            color: var(--darkColor);
+        }
+        .advanced-toggle {
+            background: none;
+            border: none;
+            color: var(--darkColor);
+            cursor: pointer;
+            padding: 5px;
+            transition: transform 0.1s ease;
+        }
+        .advanced-toggle:hover {
+            transform: scale(1.1);
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        h1 {
+            color: var(--darkColor);
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        /* Media queries for responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .calculator {
+                min-width: 100%;
+            }
+            .advanced-section {
+                flex: 1;
+                min-width: 100%;
+            }
+            .history-section {
+                flex: 1;
+                min-width: 100%;
+            }
+        }
+        .history-button {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            text-align: left;
+            margin-bottom: 10px;
+            padding-left: 15px;
+        }
+        .history-button:hover {
+            background-color: #444;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="history-section">
+            <h2>History</h2>
+            <div class="history-entries"></div>
+        </div>
+        <div class="calculator">
+            <div class="header">
+                <h1>Simple Calculator</h1>
+                <button class="advanced-toggle">⚙️</button>
+            </div>
+            <div class="display">
+                <div class="upper-display"></div>
+                <div class="lower-display"></div>
+            </div>
+            <table>
+                <tr>
+                    <td><button class="operator">+</button></td>
+                    <td><button class="operator">-</button></td>
+                    <td><button class="operator">*</button></td>
+                    <td><button class="operator">÷</button></td>
+                </tr>
+                <tr>
+                    <td><button class="number">7</button></td>
+                    <td><button class="number">8</button></td>
+                    <td><button class="number">9</button></td>
+                    <td rowspan="4"><button class="equal">=</button></td>
+                </tr>
+                <tr>
+                    <td><button class="number">4</button></td>
+                    <td><button class="number">5</button></td>
+                    <td><button class="number">6</button></td>
+                </tr>
+                <tr>
+                    <td><button class="number">1</button></td>
+                    <td><button class="number">2</button></td>
+                    <td><button class="number">3</button></td>
+                </tr>
+                <tr>
+                    <td><button class="number">.</button></td>
+                    <td><button class="number">0</button></td>
+                    <td><button class="clear">C</button></td>
+                </tr>
+            </table>
+        </div>
+        <div class="advanced-section">
+            <table>
+                <tr>
+                    <td><button class="function">%</button></td>
+                    <td><button class="function">←</button></td>
+                    <td><button class="function">(</button></td>
+                    <td><button class="function">)</button></td>
+                </tr>
+                <tr>
+                    <td><button class="function">√</button></td>
+                    <td><button class="function">^</button></td>
+                    <td><button class="function">sin</button></td>
+                    <td><button class="function">cos</button></td>
+                </tr>
+                <tr>
+                    <td><button class="function">tan</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const advancedToggle = document.querySelector('.advanced-toggle');
+        const advancedSection = document.querySelector('.advanced-section');
+        const historySection = document.querySelector('.history-section');
+        const upperDisplay = document.querySelector('.upper-display');
+        const lowerDisplay = document.querySelector('.lower-display');
+        const historyEntriesDiv = document.querySelector('.history-entries');
+        let currentInput = '';
+        let historyEntries = [];
+        let lastCalculation = '';
+        let firstNumber = '';
+        let operation = '';
+
+        // Handle number and operator clicks
+        document.querySelectorAll('.number, .operator').forEach(button => {
+            button.addEventListener('click', () => {
+                if (button.classList.contains('operator')) {
+                    if (currentInput === '') {
+                        currentInput = '0';
+                    }
+                    operation = button.textContent;
+                    firstNumber = currentInput;
+                    currentInput = '';
+                } else {
+                    currentInput += button.textContent;
+                }
+                updateDisplay();
+            });
+        });
+
+        // Handle advanced function clicks
+        document.querySelectorAll('.function').forEach(button => {
+            button.addEventListener('click', () => {
+                switch (button.textContent) {
+                    case '%':
+                        currentInput += '/100';
+                        break;
+                    case '←':
+                        currentInput = currentInput.slice(0, -1);
+                        break;
+                    case '√':
+                        currentInput = `Math.sqrt(${currentInput})`;
+                        break;
+                    case '^':
+                        currentInput += '**';
+                        break;
+                    case 'sin':
+                        currentInput = `Math.sin(${currentInput})`;
+                        break;
+                    case 'cos':
+                        currentInput = `Math.cos(${currentInput})`;
+                        break;
+                    case 'tan':
+                        currentInput = `Math.tan(${currentInput})`;
+                        break;
+                    case '(':
+                    case ')':
+                        currentInput += button.textContent;
+                        break;
+                }
+                updateDisplay();
+            });
+        });
+
+        // Handle clear button
+        document.querySelector('.clear').addEventListener('click', () => {
+            currentInput = '';
+            firstNumber = '';
+            operation = '';
+            updateDisplay();
+        });
+
+        // Handle equal button
+        document.querySelector('.equal').addEventListener('click', () => {
+            if (currentInput) {
+                try {
+                    const fullExpression = `${firstNumber}${operation}${currentInput}`;
+                    const result = eval(fullExpression);
+                    const entry = document.createElement('div');
+                    entry.className = 'history-button';
+                    entry.textContent = `${fullExpression} = ${result}`;
+                    historyEntriesDiv.appendChild(entry);
+                    historyEntries.push(entry);
+                    upperDisplay.textContent = fullExpression;
+                    lowerDisplay.textContent = result;
+                    currentInput = result.toString();
+                    firstNumber = '';
+                    operation = '';
+                } catch (error) {
+                    currentInput = 'Error';
+                    lowerDisplay.textContent = currentInput;
+                    currentInput = '';
+                }
+            } else if (currentInput) {
+                upperDisplay.textContent = '';
+                lowerDisplay.textContent = currentInput;
+            }
+        });
+
+        // Toggle advanced section visibility
+        advancedToggle.addEventListener('click', () => {
+            advancedSection.style.display = advancedSection.style.display === 'none' ? 'block' : 'none';
+        });
+
+        // Handle keyboard input
+        document.addEventListener('keydown', (e) => {
+            if (e.key >= '0' && e.key <= '9' || e.key === '.' || ['+', '-', '*', '/'].includes(e.key)) {
+                if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') {
+                    if (currentInput === '') {
+                        currentInput = '0';
+                    }
+                    operation = e.key;
+                    firstNumber = currentInput;
+                    currentInput = '';
+                } else {
+                    currentInput += e.key;
+                }
+                updateDisplay();
+            } else if (e.key === 'Enter') {
+                document.querySelector('.equal').click();
+            } else if (e.key === 'Backspace') {
+                currentInput = currentInput.slice(0, -1);
+                updateDisplay();
+            } else if (e.key === 'c' || e.key === 'C') {
+                document.querySelector('.clear').click();
+            } else if (e.key === 'g' || e.key === 'G') {
+                advancedToggle.click();
+            }
+        });
+
+        // Update display based on current state
+        function updateDisplay() {
+            if (operation) {
+                upperDisplay.textContent = `${firstNumber} ${operation}`;
+                lowerDisplay.textContent = currentInput;
+            } else {
+                upperDisplay.textContent = '';
+                lowerDisplay.textContent = currentInput;
+            }
+        }
+
+        // Make history entries clickable
+        historySection.addEventListener('click', (e) => {
+            if (e.target.classList.contains('history-button')) {
+                const parts = e.target.textContent.split(' = ');
+                upperDisplay.textContent = parts[0];
+                lowerDisplay.textContent = parts[1];
+                currentInput = parts[1];
+                firstNumber = '';
+                operation = '';
+            }
+        });
+    </script>
+</body>
+</html>
