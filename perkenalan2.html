@@ -7,8 +7,8 @@
     <meta name="keywords" content="Portofolio, Nathanael Kevin, Universitas Brawijaya, Sistem Informasi, Programming, Game, Musik">
     <meta name="author" content="Nathanael Kevin">
     <title>Portofolio - Nathanael Kevin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <style>
-
         * {
             margin: 0;
             padding: 0;
@@ -16,13 +16,16 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            background-color: #f8f9fa;
-            color: #333;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
             line-height: 1.6;
         }
 
-        /* Kontainer Utama */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -31,8 +34,8 @@
 
         /* Navigasi */
         nav {
-            background-color: #fff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: #2a2a2a;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             position: fixed;
             width: 100%;
             top: 0;
@@ -53,6 +56,7 @@
             font-weight: bold;
             color: #4CAF50;
             text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .nav-links {
@@ -66,9 +70,9 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #333;
+            color: #e0e0e0;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: color 0.3s ease;
         }
 
         .nav-links a:hover {
@@ -77,60 +81,183 @@
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
-            color: white;
-            padding: 120px 20px 80px;
+            background: #121212;
+            color: #ffffff;
+            padding: 150px 20px 100px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            100% {
+                left: 100%;
+            }
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4.5rem;
+            margin-bottom: 25px;
+            animation: fadeInDown 1s ease;
         }
 
         .hero p {
             font-size: 1.2rem;
             max-width: 800px;
             margin: 0 auto;
+            animation: fadeInUp 1s ease 0.5s;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Greetings Section */
         .greetings {
-            background-color: white;
+            background-color: #2a2a2a;
             padding: 60px 20px;
             text-align: center;
         }
 
-        .greetings h2 {
-            color: #2196F3;
-            margin: 15px 0;
+        .greetings-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .greetings h3 {
-            color: #9C27B0;
-            margin: 15px 0;
+        .greeting-card {
+            padding: 30px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
         }
 
-        .greetings h4 {
-            color: #FF9800;
-            margin: 15px 0;
+        .greeting-card.japanese {
+            background: linear-gradient(135deg, #2196F3, #03A9F4);
         }
 
-        .greetings h5 {
-            color: #E91E63;
-            margin: 15px 0;
+        .greeting-card.chinese {
+            background: linear-gradient(135deg, #FF9800, #FFB74D);
         }
 
-        .greetings h6 {
-            color: red;
-            text-decoration: underline;
-            margin: 15px 0;
+        .greeting-card.korean {
+            background: linear-gradient(135deg, #E91E63, #F44336);
+        }
+
+        .greeting-card.thai {
+            background: linear-gradient(135deg, #9C27B0, #BA68C8);
+        }
+
+        .greeting-card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .greeting-card p {
+            font-size: 1rem;
+        }
+
+        /* Animation for greeting cards */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .greeting-card:nth-child(1) {
+            animation: fadeInUp 0.8s forwards 0.2s;
+        }
+
+        .greeting-card:nth-child(2) {
+            animation: fadeInUp 0.8s forwards 0.4s;
+        }
+
+        .greeting-card:nth-child(3) {
+            animation: fadeInUp 0.8s forwards 0.6s;
+        }
+
+        .greeting-card:nth-child(4) {
+            animation: fadeInUp 0.8s forwards 0.8s;
+        }
+
+        .greeting-card:nth-child(5) {
+            animation: fadeInUp 0.8s forwards 1.0s;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .greetings-container {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+            
+            .greeting-card h2 {
+                font-size: 1.5rem;
+            }
+            
+            .greeting-card p {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .greetings-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .greeting-card {
+                padding: 20px 15px;
+            }
+            
+            .greeting-card h2 {
+                font-size: 1.3rem;
+            }
         }
 
         /* Profile Section */
         .profile {
             padding: 60px 20px;
-            background-color: white;
+            background-color: #2a2a2a;
         }
 
         .profile-container {
@@ -139,6 +266,7 @@
             justify-content: center;
             align-items: center;
             gap: 40px;
+            animation: fadeIn 0.8s;
         }
 
         .profile-image {
@@ -147,7 +275,12 @@
             border-radius: 50%;
             object-fit: cover;
             border: 5px solid #4CAF50;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.05);
         }
 
         .profile-info {
@@ -161,19 +294,34 @@
 
         .profile-info strong {
             font-weight: 600;
-            color: #333;
+            color: #ffffff;
         }
 
+        /* Skills Section */
         .skills {
             padding: 60px 20px;
-            background-color: #f8f9fa;
+            background-color: #1a1a1a;
         }
 
         .section-title {
             text-align: center;
             margin-bottom: 40px;
-            font-size: 2rem;
-            color: #333;
+            font-size: 2.5rem;
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background-color: #4CAF50;
         }
 
         .skills-container {
@@ -183,11 +331,11 @@
         }
 
         .skill-card {
-            background-color: white;
+            background-color: #2a2a2a;
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
         }
 
         .skill-card:hover {
@@ -197,46 +345,19 @@
         .skill-card h3 {
             color: #4CAF50;
             margin-bottom: 15px;
-        }
-
-        .skill-bar {
-            height: 20px;
-            background-color: #e0e0e0;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 20px;
-        }
-
-        .skill-level {
-            height: 100%;
-            border-radius: 10px;
-            text-align: right;
-            padding: 0 10px;
-            color: white;
-            font-weight: bold;
+            font-family: 'Montserrat', sans-serif;
             display: flex;
             align-items: center;
-            justify-content: flex-end;
         }
 
-        .skill-java {
-            width: 80%;
-            background-color: #f44336;
+        .skill-card i {
+            margin-right: 10px;
         }
 
-        .skill-html {
-            width: 75%;
-            background-color: #2196F3;
-        }
-
-        .skill-osint {
-            width: 60%;
-            background-color: #9C27B0;
-        }
-
+        /* Education Section */
         .education {
             padding: 60px 20px;
-            background-color: white;
+            background-color: #2a2a2a;
         }
 
         .education-container {
@@ -246,24 +367,26 @@
         }
 
         .education-card {
-            background-color: white;
+            background-color: #2a2a2a;
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         .education-card h3 {
             color: #4CAF50;
             margin-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .education-card p {
-            color: #666;
+            color: #b0b0b0;
         }
 
+        /* Contact Section */
         .contact {
             padding: 60px 20px;
-            background-color: #f8f9fa;
+            background-color: #1a1a1a;
             text-align: center;
         }
 
@@ -280,8 +403,8 @@
             flex-direction: column;
             align-items: center;
             text-decoration: none;
-            color: #333;
-            transition: transform 0.3s;
+            color: #e0e0e0;
+            transition: transform 0.3s ease;
         }
 
         .contact-link:hover {
@@ -291,13 +414,18 @@
         .contact-icon {
             width: 60px;
             height: 60px;
-            background-color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-link:hover .contact-icon {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
         }
 
         .instagram-icon {
@@ -315,9 +443,10 @@
             color: white;
         }
 
+        /* Footer */
         footer {
-            background-color: #333;
-            color: white;
+            background-color: #121212;
+            color: #e0e0e0;
             text-align: center;
             padding: 40px 20px;
         }
@@ -337,13 +466,38 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s ease;
         }
 
         .social-link:hover {
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.3);
         }
 
+        /* Floating Action Button */
+        .fab-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            z-index: 100;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .fab-button:hover {
+            transform: scale(1.1);
+            background-color: #3e8e41;
+        }
+
+        /* Media Queries */
         @media (max-width: 768px) {
             .nav-container {
                 flex-direction: column;
@@ -397,18 +551,35 @@
 
     <section class="greetings">
         <div class="container">
-            <h2 id="greeting-indonesia">Halo semuanya!</h2>
-            <h3 id="greeting-japan">こんにちは!</h3>
-            <h4 id="greeting-china">你好！</h4>
-            <h5 id="greeting-korea">안녕하세요!</h5>
-            <h6 id="greeting-thailand">สวัสดี!</h6>
+            <div class="greetings-container">
+                <div class="greeting-card indonesian">
+                    <h2>Halo semuanya!</h2>
+                    <p>Bahasa Indonesia</p>
+                </div>
+                <div class="greeting-card japanese">
+                    <h2>こんにちは!</h2>
+                    <p>Bahasa Jepang</p>
+                </div>
+                <div class="greeting-card chinese">
+                    <h2>你好！</h2>
+                    <p>Bahasa Tionghoa</p>
+                </div>
+                <div class="greeting-card korean">
+                    <h2>안녕하세요!</h2>
+                    <p>Bahasa Korea</p>
+                </div>
+                <div class="greeting-card thai">
+                    <h2>สวัสดี!</h2>
+                    <p>Bahasa Thailand</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <section id="profile" class="profile">
         <div class="container">
             <div class="profile-container">
-                <img src="img1.JPG" alt="Foto Nathanael Kevin" class="profile-image" id="profile-picture">
+                <img src="img1.jpg" alt="Foto Nathanael Kevin" class="profile-image" id="profile-picture">
                 <div class="profile-info">
                     <p><strong>Nama:</strong> Nathanael Kevin</p>
                     <p><strong>Umur:</strong> 18 tahun</p>
@@ -425,24 +596,15 @@
             <h2 class="section-title">Keterampilan</h2>
             <div class="skills-container">
                 <div class="skill-card">
-                    <h3>Java</h3>
-                    <div class="skill-bar">
-                        <div class="skill-level skill-java">80%</div>
-                    </div>
+                    <h3><i class="fab fa-java"></i> Java</h3>
                     <p>Pengalaman dalam pengembangan program menggunakan Java</p>
                 </div>
                 <div class="skill-card">
-                    <h3>HTML</h3>
-                    <div class="skill-bar">
-                        <div class="skill-level skill-html">75%</div>
-                    </div>
+                    <h3><i class="fab fa-html5"></i> HTML</h3>
                     <p>Kemampuan dalam pembuatan struktur website yang responsif dan user-friendly</p>
                 </div>
                 <div class="skill-card">
-                    <h3>OSINT</h3>
-                    <div class="skill-bar">
-                        <div class="skill-level skill-osint">60%</div>
-                    </div>
+                    <h3><i class="fas fa-search"></i> OSINT</h3>
                     <p>Keterampilan dalam pengumpulan dan analisis informasi dari sumber terbuka</p>
                 </div>
             </div>
@@ -504,9 +666,116 @@
                     <i class="fab fa-linkedin"></i>
                 </a>
             </div>
-            <p>&copy; 2025 Nathanael Kevin. All Rights Reserved.</p>
+            <p>© 2025 Nathanael Kevin. All Rights Reserved.</p>
         </div>
     </footer>
 
+    <div class="fab-button">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Back to top button functionality
+        const fabButton = document.querySelector('.fab-button');
+        fabButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Animation for section titles
+        const sectionTitles = document.querySelectorAll('.section-title');
+        sectionTitles.forEach(title => {
+            title.style.opacity = '0';
+            title.style.transform = 'translateY(20px)';
+            title.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+            
+            observer.observe(title);
+        });
+
+        // Animation for skill cards
+        const skillCards = document.querySelectorAll('.skill-card');
+        skillCards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+            
+            observer.observe(card);
+        });
+
+        // Animation for education cards
+        const educationCards = document.querySelectorAll('.education-card');
+        educationCards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+            
+            observer.observe(card);
+        });
+
+        // Animation for contact links
+        const contactLinks = document.querySelectorAll('.contact-link');
+        contactLinks.forEach(link => {
+            link.style.opacity = '0';
+            link.style.transform = 'translateY(20px)';
+            link.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+            
+            observer.observe(link);
+        });
+    </script>
+
+    <!-- Font Awesome untuk ikon -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>
