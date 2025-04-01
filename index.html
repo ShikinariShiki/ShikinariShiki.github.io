@@ -50,7 +50,6 @@
         .nav-link { position: relative; transition: all 0.3s ease; }
         .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background-color: white; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); transform-origin: left; }
         .nav-link:hover::after { width: 100%; }
-        /* Header link style */
         .header-link { transition: opacity 0.3s ease; }
         .header-link:hover { opacity: 0.9; }
 
@@ -64,7 +63,7 @@
         .skill-bar { height: 8px; border-radius: 4px; background-color: var(--card-bg); filter: brightness(0.9); overflow: hidden; position: relative; }
         html.dark .skill-bar { filter: brightness(1.1); }
         .skill-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--primary), var(--accent)); 
-            transition: width 1.8s cubic-bezier(0.25, 1, 0.5, 1); /* ease-out variant */
+            transition: width 1.8s cubic-bezier(0.25, 1, 0.5, 1); 
             position: relative; transform-origin: left; 
         }
         .skill-fill::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255, 255, 255, 0.3); opacity: 0.5; border-radius: 4px; animation: shimmer 2.8s infinite ease-in-out; }
@@ -140,6 +139,7 @@
             opacity: 0; 
             visibility: hidden; 
             transition: opacity 0.4s ease-in-out, visibility 0s linear 0.4s; /* Hide visibility after fade out */
+            /* Increased opacity for overlay */
             background-color: rgba(17, 24, 39, 0.95); /* Use Tailwind gray-900 with high opacity */
         }
         html.dark #mobile-menu {
@@ -150,13 +150,13 @@
             visibility: visible; 
             transition: opacity 0.4s ease-in-out, visibility 0s; /* Show immediately */
         }
-        /* Animate the inner container (fade in with slight scale) */
-        #mobile-menu > div { 
+        /* Inner container for centering */
+        #mobile-menu .menu-content { 
             transform: scale(0.95); 
             opacity: 0; 
             transition: transform 0.4s ease-in-out 0.1s, opacity 0.4s ease-in-out 0.1s; /* Add delay */
         }
-        #mobile-menu.open > div { 
+        #mobile-menu.open .menu-content { 
             transform: scale(1); 
             opacity: 1; 
         }
@@ -189,13 +189,14 @@
             </div>
         </div>
                 
-        <!-- Mobile Navigation (Full Page Overlay - Revised Background) -->
-        <div id="mobile-menu" class="md:hidden fixed inset-0 bg-gray-900/95 dark:bg-black/95 backdrop-blur-md z-[60] flex items-center justify-center"> 
-            <!-- Inner container for centering content -->
-            <div class="text-center"> 
-                <button id="close-menu" class="absolute top-6 right-6 text-white text-3xl"> 
-                    <i class="fas fa-times"></i>
-                </button>
+        <!-- Mobile Navigation (Full Page Overlay - Revised Background & Structure) -->
+        <div id="mobile-menu" class="md:hidden fixed inset-0 backdrop-blur-md z-[60] flex items-center justify-center"> 
+            <!-- Close Button -->
+             <button id="close-menu" class="absolute top-6 right-6 text-white text-3xl z-10"> 
+                 <i class="fas fa-times"></i>
+             </button>
+             <!-- Inner container for centering content -->
+            <div class="menu-content text-center"> 
                 <div class="space-y-8"> 
                     <a href="#about" class="block text-white text-2xl hover:text-blue-300 transition py-2 section-highlight" onclick="handleNavClick('about', event)">About</a>
                     <a href="#skills" class="block text-white text-2xl hover:text-blue-300 transition py-2 section-highlight" onclick="handleNavClick('skills', event)">Skills</a>
@@ -347,10 +348,11 @@
                                  </div>
                              </div>
                          </div>
-                         <!-- Tools & Technologies -->
+                         <!-- Tools & Technologies (Renamed Heading as Requested) -->
                          <div class="mt-8">
+                             <!-- Note: Heading changed from "Tools & Technologies" as requested -->
                              <h4 class="text-lg font-medium mb-4 text-[var(--text-color)] opacity-90 flex items-center">
-                                 <i class="fas fa-tools mr-2 text-orange-500"></i>Tools & Technologies
+                                 <i class="fas fa-tools mr-2 text-orange-500"></i>Hard Skills 
                              </h4>
                             <div class="bg-[var(--card-bg)] p-6 rounded-xl shadow-lg transition-all duration-500 hover:shadow-xl">
                                 <div class="flex flex-wrap gap-3">
@@ -503,8 +505,8 @@
 
     <!-- Background Music -->
     <audio id="background-music" loop>
-         <!-- IMPORTANT: Replace # with the actual path to your music file if you have one -->
-        <source src="audio.mp3" type="audio/mpeg"> 
+         <!-- IMPORTANT: Placeholder source, replace if needed -->
+        <source src="#" type="audio/mpeg"> 
         Your browser does not support the audio element.
     </audio>
 
@@ -571,7 +573,6 @@
 
         function toggleMusic() {
             const shouldPlay = backgroundMusic.paused || backgroundMusic.muted;
-            // Check if the src is not just the placeholder '#'
             const hasValidSrc = backgroundMusic.currentSrc && !backgroundMusic.currentSrc.endsWith('#');
 
             if (shouldPlay && hasValidSrc) {
@@ -582,15 +583,14 @@
                 }).catch(error => {
                     console.error("Audio playback failed:", error); 
                     alert("Audio playback failed. Please interact with the page first or check browser settings.");
-                     updateMusicButtonIcon(true); // Revert icon if play failed
+                     updateMusicButtonIcon(true); 
                      localStorage.setItem('musicMuted', 'true');
                 });
-            } else if (!shouldPlay && hasValidSrc) { // Only pause if playing and has valid src
+            } else if (!shouldPlay && hasValidSrc) { 
                 backgroundMusic.pause();
                 updateMusicButtonIcon(true); 
                 localStorage.setItem('musicMuted', 'true'); 
             } else {
-                 // If no valid source, keep it visually muted
                  console.warn("No valid audio source found or already paused/muted.");
                  updateMusicButtonIcon(true);
                  localStorage.setItem('musicMuted', 'true');
@@ -645,6 +645,13 @@
         const closeMenuButton = document.getElementById('close-menu');
         hamburger.addEventListener('click', function() { toggleMobileMenu(true); });
         closeMenuButton.addEventListener('click', function() { toggleMobileMenu(false); });
+        // Close menu when clicking the overlay background
+        mobileMenu.addEventListener('click', function(event) {
+            // Check if the click target is the overlay itself (not its children)
+            if (event.target === mobileMenu) {
+                 toggleMobileMenu(false);
+            }
+        });
         function toggleMobileMenu(open) {
             hamburger.classList.toggle('open', open);
             mobileMenu.classList.toggle('open', open);
@@ -714,7 +721,7 @@
 
         function animateElementsInSection(sectionElement) {
             if (sectionElement.id === 'skills') {
-                setTimeout(animateSkillBars, 300); // Delay bars slightly more
+                setTimeout(animateSkillBars, 300); 
             }
         }
 
@@ -745,7 +752,7 @@
                  const element = entry.target;
                  if (entry.isIntersecting) {
                      if (element.id === 'skills') {
-                         animateSkillBars(); // Trigger bars when skills section is intersecting
+                         animateSkillBars(); 
                      }
                      if (element.classList.contains('animate-fade-in-up') && element.style.opacity !== '1') {
                          element.style.opacity = '1';
@@ -753,7 +760,7 @@
                      }
                  } 
              });
-         }, { threshold: 0.2 }); // Trigger when 20% is visible
+         }, { threshold: 0.15 }); 
 
          function setInitialAnimationState() {
              document.querySelectorAll('.animate-fade-in-up').forEach(element => {
@@ -791,7 +798,7 @@
              });
              const skillsSectionElement = document.getElementById('skills');
              if (skillsSectionElement && isElementInViewport(skillsSectionElement)) {
-                 animateSkillBars(); // Animate bars if skills section is visible on load
+                 animateSkillBars(); 
              }
          }
 
